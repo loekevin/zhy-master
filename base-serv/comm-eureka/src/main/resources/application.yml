@@ -1,0 +1,27 @@
+server:
+  #eureka默认端口
+  port: 8761
+
+spring:
+  application:
+    name: zhy-eureka
+
+eureka:
+  instance:
+    hostname: zhy-eureka
+  client:
+    #eureka.client.registerWithEureka=true #是否向服务注册中心注册自己
+    registerWithEureka: false
+    ##false表示自己端就是注册中心，我的职责就是维护服务实例，并不需要去检索服务
+    fetchRegistry: false
+    serviceUrl:
+      defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/
+#Eureka Server通过eureka.client.serviceUrl.defaultZone属性设置Eureka的服务注册中心的位置。
+    #指定region和zone的属性如下：
+    #1.eureka.client.availabilityZones.myregion=myzone# myregion是region
+    #2.eureka.client.region=myregion
+    availabilityZones:
+      myregion: myzone
+    region: myregion
+
+

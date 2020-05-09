@@ -1,0 +1,38 @@
+debug: true
+server:
+  servlet:
+#    context-path: /resources-interface
+    session:
+      timeout: 3600
+      cookie:
+        path: /
+  port: 4010
+
+#设置配置文件的路径
+spring:
+  application:
+    name: resources-interface
+  main:
+    allow-bean-definition-overriding: true
+  profiles:
+    active: dev
+  cloud:
+    config:
+      name: ${spring.application.name},busi-comm,eureka
+      profile: ${spring.profiles.active}
+
+#启用Eureka对Ribbon服务实例的维护实现。
+ribbon:
+  eureka:
+    enabled: true
+
+#feigh自带断路器,但是默认是没有打开的
+#feign:
+#  hystrix:
+#    enabled: true  #打开断路器
+#  client:
+#    config:
+#      default:
+#        connectTimeout: 5000
+#        readTimeout: 5000
+

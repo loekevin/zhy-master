@@ -1,0 +1,27 @@
+server:
+  servlet:
+    context-path: /app-interface
+    session:
+      timeout: 3600
+      cookie:
+        path: /
+  port: 4011
+
+spring:
+  application:
+    name: app-interface
+  main:
+      allow-bean-definition-overriding: true
+  profiles:
+    active: dev
+#  cloud:
+#    config:
+#      name: ${spring.application.name}
+#      profile: ${spring.profiles.active}
+
+eureka:
+  instance:
+    prefer-ip-address: true
+  client:
+    service-url:
+      defaultZone: http://zhy-eureka:8761/eureka/

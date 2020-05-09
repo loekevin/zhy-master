@@ -1,0 +1,22 @@
+server:
+  port: 3000
+
+spring:
+  application:
+    name: zhy-monitor
+  main:
+    allow-bean-definition-overriding: true
+
+  profiles:
+    active: dev
+  cloud:
+    config:
+      name: ${spring.application.name},eureka
+      profile: ${spring.profiles.active}
+  security:
+    user:
+     #服务监控登陆账号密码
+      name: finest
+      password: finest
+
+

@@ -1,0 +1,7 @@
+#服务注册中心--公共配置
+eureka:
+  instance:
+    prefer-ip-address: true
+  client:
+    service-url:
+      defaultZone: http://zhy-eureka:8761/eureka/

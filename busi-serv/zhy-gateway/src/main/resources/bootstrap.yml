@@ -1,0 +1,56 @@
+server:
+  port: 9999  #端口号
+
+spring:
+  application:
+    name: zhy-gateway #网关服务名称
+  main:
+    allow-bean-definition-overriding: true
+  profiles:
+    active: dev
+  cloud:
+    config:
+      name: ${spring.application.name},busi-comm
+      profile: ${spring.profiles.active}
+
+eureka:
+  instance:
+    prefer-ip-address: true #返回ip地址而不是hostname
+  client:
+    registry-fetch-interval-seconds: 5    # 获取注册列表的周期
+    #eureka注册中心地址
+    service-url:
+      defaultZone: http://zhy-eureka:8761/eureka/
+
+
+zuul:
+  #需要忽略的头部信息，不在传播到其他服务
+  sensitive-headers: Access-Control-Allow-Origin
+  ignored-headers: Access-Control-Allow-Origin,H-APP-Id,Token,APPToken
+  semaphore:
+    max-semaphores: 2000 #默认信号量大小100，设置全部路由最大信号量
+
+##防止zuul调用等待超时
+hystrix:
+  command:
+    default:
+      execution:
+        timeout:
+#          enabled: true
+        isolation:
+          thread:
+          #断路器的超时时间,断路器的超时时间需要大于ribbon的超时时间，不然不会触发重试。
+            timeoutInMilliseconds: 6000
+#  threadpool:
+#    default:
+#   # 设置feign的核心线程池的数量
+#      coreSize: 100
+ribbon:
+  #  #请求处理的超时时间
+  ReadTimeout: 6000
+  #  #ribbon请求连接的超时时间
+  ConnectTimeout: 6000
+#  MaxAutoRetries: 0
+#  MaxAutoRetriesNextServer: 1
+#  eureka:
+#    enabled: false

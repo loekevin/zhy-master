@@ -1,0 +1,40 @@
+核心依赖：
+Spring Cloud	Greenwich.SR2
+Spring Boot	2.1.6.RELEASE
+Swagger2	2.9.2
+Txlcn 5.0.2.RELEASE
+Redis windows3.2
+
+base-serv模块说明：
+    基础组件
+    comm-eureka: 服务注册与发现
+        端口：8761
+        修改本地`hosts`文件，添加如下内容
+        127.0.0.1 zhy-eureka
+    comm-config：分布式配置管理中心
+        端口: 8888
+        服务配置文件存放config目录下
+        可以根据需要增加一套开发一套线上的配置
+    comm-monitor: 分布式监控中心
+        端口：3000
+        访问监控页面地址：http://IP:3000
+    comm-zipkip:服务链路追踪
+        端口：3001
+        访问监控页面地址：http://IP:3001/zipkin/
+busi-serv模块说明：
+    指挥云基础服务
+    1:zhy-pojo：指挥云实体类（实体类单独抽离出来便于复用，同时方便维护）
+    2:busi-comm：业务公共层（包含常用工具类，redis，swagger，或者其他可复用的方法）
+        Swagger2的访问地址：
+        http://IP:端口/模块名/swagger-ui.html#/
+    3:app-interface：终端服务
+    4:zhy-gateway：服务网关  端口: 9999(包含拦截器限流服务动态路由配置)
+    5:comm-log:日志服务（搬安保系统）--暂无使用
+    6:resources-interface：基础资源服务接口（包含图层，空间检索等服务）
+    7:tx-manager:分布式事物管理服务
+    8:zhy-dispatch:指挥调度模块（指挥云核心模块）
+    ##9:zhy-api:指挥云服务调用模块（用于内部服务之间调用，包含容错机制代码）
+              远程调用服务之前需要在该模块下新增一个服务类和一个容错机制 (暂无!)
+
+
+

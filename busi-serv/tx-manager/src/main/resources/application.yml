@@ -1,0 +1,52 @@
+server:
+  port: 7970
+
+spring:
+  application:
+    name: tx-manager
+
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://127.0.0.1:3306/tx-manager?characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=false&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=Asia/Shanghai
+    username: root
+    password: root
+
+
+  #redis 配置
+  redis:
+    host: 127.0.0.1
+    port: 6379
+    password:
+
+tx-lcn:
+  manager:
+    #TM后台登陆密码，默认值为codingapi
+    admin-key: kevin
+    #TxManager Host Ip
+    host: 127.0.0.1
+    #TxClient连接请求端口
+    port: 8070
+    #心跳检测时间 单位：ms
+    heart-time: 12000
+    #事务执行总时间 单位ms
+    dtx-time: 10000
+    #事务处理并发等级. 默认为机器逻辑核心数5倍
+    concurrent-level: 128
+  #开启日志,默认为false
+  logger:
+    enabled: true
+
+
+logging:
+  level:
+    com:
+      codingapi:
+        txlcn: DEBUG
+
+#注册中心
+eureka:
+  client:
+    service-url:
+      defaultZone: http://zhy-eureka:8761/eureka/
+  instance:
+    prefer-ip-address: true
